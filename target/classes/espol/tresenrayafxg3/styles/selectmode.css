@@ -1,0 +1,28 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+#selectMode {
+    -fx-background-color: #f0f0f0; /* Light gray background */
+    -fx-padding: 20px; /* Padding around the main container */
+    -fx-font-family: "Arial", sans-serif; /* Font family for the entire screen */
+}
+
+/* Styles for the select mode screen */
+.label {
+    -fx-font-size: 16px; /* Font size for labels */
+    -fx-text-fill: #333333; /* Dark gray text color */
+}
+
+.radioButton {
+    -fx-font-size: 14px; /* Font size for radio buttons */
+    -fx-text-fill: #555555; /* Medium gray text color */
+    -fx-padding: 5px; /* Padding around radio buttons */
+}
+
+.toggleGroup {
+    -fx-spacing: 10px; /* Spacing between toggle buttons */
+    -fx-alignment: center; /* Center alignment for toggle buttons */
+    -fx-padding: 10px;
+    -fx-background-color: #ffffff; /* White background for toggle group */
+}

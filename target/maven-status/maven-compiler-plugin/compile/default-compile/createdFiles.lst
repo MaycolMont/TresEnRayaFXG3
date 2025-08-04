@@ -1,0 +1,17 @@
+espol\tresenrayafxg3\models\BoardStatesGenerator$1.class
+espol\tresenrayafxg3\models\Position.class
+espol\tresenrayafxg3\models\Player.class
+espol\tresenrayafxg3\controllers\BoardController.class
+espol\tresenrayafxg3\models\BoardMove.class
+espol\tresenrayafxg3\models\Line.class
+espol\tresenrayafxg3\util\Suscriber.class
+espol\tresenrayafxg3\models\PlayerIA.class
+espol\tresenrayafxg3\util\Publisher.class
+espol\tresenrayafxg3\App.class
+espol\tresenrayafxg3\models\BoardStatesGenerator.class
+espol\tresenrayafxg3\controllers\SelectModeController.class
+module-info.class
+espol\tresenrayafxg3\models\StateTree.class
+espol\tresenrayafxg3\models\Board.class
+espol\tresenrayafxg3\models\Box.class
+espol\tresenrayafxg3\util\TreeNode.class

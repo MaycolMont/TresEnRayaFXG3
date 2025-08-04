@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane   id="board" 
+            fx:id="board" 
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="espol.tresenrayafxg3.controllers.BoardController">
+    <stylesheets>
+        <URL value="@styles/board.css"/>
+    </stylesheets>
+</GridPane>

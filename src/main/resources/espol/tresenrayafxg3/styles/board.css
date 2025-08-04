@@ -1,0 +1,26 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+#board {
+    -fx-background-color: #F0F0F0;
+    -fx-padding: 10px;
+    -fx-hgap: 5px;
+    -fx-vgap: 5px;
+    -fx-alignment: center;
+    
+}
+
+.board-button {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #000000;
+    -fx-border-width: 2px;
+    -fx-pref-width: 50px;
+    -fx-pref-height: 50px;
+    -fx-font-size: 16px;
+    -fx-text-fill: #000000;
+    -fx-cursor: hand;
+}
+.board-button:hover {
+    -fx-background-color: #E0E0E0;
+}
