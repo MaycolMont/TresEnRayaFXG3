@@ -48,20 +48,40 @@ public class SelectModeController implements Initializable {
     }
 
     private void switchToBoard() {
-        // getting BoardController
-        try { // pasarle un callback que funcione como decorador
+        String mode = modeGroup.getSelectedToggle().getUserData().toString();
+        boolean startX = firstPlayerGroup.getSelectedToggle().getUserData().toString().equals("X");
+        String computerSymbol = null;
+        if (computerSymbolGroup.getSelectedToggle() != null) {
+            computerSymbol = computerSymbolGroup.getSelectedToggle().getUserData().toString();
+        }
+
+        try {
             FXMLLoader loader = new FXMLLoader(App.class.getResource("board.fxml"));
-            Parent root = loader.load();
-            BoardController boardController = loader.getController();
-            boardController.initData(
-                firstPlayerGroup.getSelectedToggle().getUserData().toString().equals("X")
-            );
-            App.setRoot(root);
+
+            if ("HUMAN_VS_HUMAN".equals(mode)) {
+                // Controlador para Humano vs Humano
+                BoardController controller = new BoardController();
+                loader.setController(controller);
+                Parent root = loader.load();
+                controller.initData(startX);
+                App.setRoot(root);
+
+            } else if ("HUMAN_VS_AI".equals(mode)) {
+                // Controlador para Humano vs IA
+                BoardComputerController controller = new BoardComputerController();
+                loader.setController(controller);
+                Parent root = loader.load();
+
+                boolean computerStarts = computerSymbol != null
+                        && computerSymbol.equals(firstPlayerGroup.getSelectedToggle().getUserData().toString());
+                controller.initData(startX, computerStarts);
+
+                App.setRoot(root);
+            } else {
+                throw new IllegalArgumentException("Modo no soportado: " + mode);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String mode = modeGroup.getSelectedToggle().getUserData().toString();
-        String firstPlayer = firstPlayerGroup.getSelectedToggle().getUserData().toString();
-        String computerSymbol = computerSymbolGroup.getSelectedToggle().getUserData().toString();
     }
 }

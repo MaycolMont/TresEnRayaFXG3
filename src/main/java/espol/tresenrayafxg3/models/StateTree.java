@@ -44,7 +44,7 @@ public class StateTree {
 
     public BoardMove getBestMove() {
         Board bestState = getBestState(root, true).getData();
-        if (bestState.isFull()) return bestState.getLastMove();
+        if (bestState.isFull() || bestState.isFinished()) return bestState.getLastMove();
         return bestState.getPreviousMove();
     }
 

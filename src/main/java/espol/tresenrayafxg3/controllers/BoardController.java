@@ -4,13 +4,20 @@
  */
 package espol.tresenrayafxg3.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import espol.tresenrayafxg3.models.*;
 
 /**
@@ -23,7 +30,7 @@ public class BoardController implements Initializable {
     // It will contain buttons for each cell in the 3x3 grid
 
     @FXML
-    private GridPane board;
+    protected GridPane board;
 
     // Reference to the Board model
     protected Board gameBoard;
@@ -44,7 +51,7 @@ public class BoardController implements Initializable {
         gameBoard = new Board(firstPlayer, secondPlayer);
     }
 
-    private void addButtons() {
+    protected void addButtons() {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
                 Button button = new Button();
@@ -67,20 +74,57 @@ public class BoardController implements Initializable {
     }
 
     protected void handleButtonClick(Button button) {
-        // Get the position of the button
         int row = GridPane.getRowIndex(button);
         int col = GridPane.getColumnIndex(button);
 
-        // Mark the corresponding box on the game board
         try {
-            button.setText(String.valueOf(gameBoard.getCurrentPlayer()));
-            gameBoard.markBox(row, col);
-            button.setDisable(true); // desabilita el botón para no poder volver a ser presionado
-            if (gameBoard.isFinished()) {
-                System.out.println("Game finished! Current player: " + gameBoard.getCurrentPlayer());
-                resetBoard();
+            if (gameBoard.isEmptyBox(row, col)) {
+                button.setText(String.valueOf(gameBoard.getCurrentPlayer()));
+                gameBoard.markBox(row, col);
+                if (gameBoard.isFinished()) {
+                    handleEndGame();
+                }
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+private void handleEndGame() {
+    char winner = gameBoard.getWinner();
+    String message;
+    if (winner == 'X' || winner == 'O') {
+        message = "¡Ha ganado el jugador '" + winner + "'!";
+    } else {
+        message = "¡Empate!";
+    }
+
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Juego Terminado");
+    alert.setHeaderText(message);
+    alert.setContentText("¿Deseas volver a jugar o regresar al menú principal?");
+
+    ButtonType btnReplay = new ButtonType("Volver a jugar");
+    ButtonType btnMenu = new ButtonType("Menú Principal");
+
+    alert.getButtonTypes().setAll(btnReplay, btnMenu);
+
+    alert.showAndWait().ifPresent(response -> {
+        if (response == btnReplay) {
+            resetBoard();
+        } else if (response == btnMenu) {
+            goToMainMenu();
+        }
+    });
+}
+
+    private void goToMainMenu() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/espol/tresenrayafxg3/selectMode.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) board.getScene().getWindow();
+            stage.getScene().setRoot(root);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

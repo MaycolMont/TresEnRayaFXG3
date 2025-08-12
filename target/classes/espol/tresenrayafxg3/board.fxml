@@ -7,10 +7,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane   id="board" 
-            fx:id="board" 
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="espol.tresenrayafxg3.controllers.BoardController">
+<GridPane id="board" 
+          fx:id="board" 
+          xmlns:fx="http://javafx.com/fxml/1"
+          style="-fx-background-color: #f5f5dc;"
+          AnchorPane.topAnchor="0" 
+          AnchorPane.bottomAnchor="0" 
+          AnchorPane.leftAnchor="0" 
+          AnchorPane.rightAnchor="0">
+
     <stylesheets>
         <URL value="@styles/board.css"/>
     </stylesheets>
