@@ -1,56 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="selecMode" 
-            styleClass="mainFxmlClass" 
-            xmlns:fx="http://javafx.com/fxml/1" 
-            fx:controller="espol.tresenrayafxg3.controllers.SelectModeController">
+<AnchorPane id="selecMode" style="-fx-background-color: #e4cb40ff;" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="espol.tresenrayafxg3.controllers.SelectModeController">
+
     <stylesheets>
-        <URL value="@styles/selectmode.css"/>
+        <URL value="@styles/selectmode.css" />
     </stylesheets>
-        <VBox>
+
+    <VBox fx:id="mainVBox" style="-fx-background-color: #f5f5dc;" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" spacing="15" alignment="CENTER">
 
         <!-- Título -->
-        <Label text="Configuración de Partida"/>
+        <Label alignment="CENTER" prefHeight="25.0" prefWidth="212.0" text="Configuración de Partida" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
 
         <!-- Modo de juego -->
-        <VBox styleClass="toggleGroup">
+        <VBox styleClass="toggleGroup" spacing="10">
             <fx:define>
-                <ToggleGroup fx:id="modeGroup"/>
+                <ToggleGroup fx:id="modeGroup" />
             </fx:define>
-            <Label text="Selecciona modo de juego:"/>
-            <RadioButton text="IA vs IA" toggleGroup="$modeGroup" fx:id="rbIaVsIa" userData="AI_VS_AI"/>
-            <RadioButton text="Jugador vs IA" toggleGroup="$modeGroup" fx:id="rbVsIa" userData="HUMAN_VS_AI"/>
-            <RadioButton text="2 Jugadores" toggleGroup="$modeGroup" fx:id="rb2Jugadores" userData="HUMAN_VS_HUMAN"/>
+            <Label text="Selecciona modo de juego:" />
+            <RadioButton fx:id="rbIaVsIa" text="IA vs IA" userData="AI_VS_AI" toggleGroup="$modeGroup" />
+            <RadioButton fx:id="rbVsIa" text="Jugador vs IA" toggleGroup="$modeGroup" userData="HUMAN_VS_AI" />
+            <RadioButton fx:id="rb2Jugadores" text="2 Jugadores" toggleGroup="$modeGroup" userData="HUMAN_VS_HUMAN" />
         </VBox>
 
         <!-- Primer jugador -->
-        <VBox styleClass="toggleGroup">
+        <VBox styleClass="toggleGroup" spacing="10">
             <fx:define>
-                <ToggleGroup fx:id="firstPlayerGroup"/>
+                <ToggleGroup fx:id="firstPlayerGroup" />
             </fx:define>
-            <Label text="Primer jugador:"/>
-            <RadioButton text="X" toggleGroup="$firstPlayerGroup" fx:id="rbX" userData="X"/>
-            <RadioButton text="O" toggleGroup="$firstPlayerGroup" fx:id="rbO" userData="O"/>
+            <Label text="Primer jugador:" />
+            <RadioButton fx:id="rbX" text="X" userData="X" toggleGroup="$firstPlayerGroup" />
+            <RadioButton fx:id="rbO" text="O" toggleGroup="$firstPlayerGroup" userData="O" />
         </VBox>
+
         <!-- Símbolo de la computadora (solo si se selecciona IA) -->
-        <VBox styleClass="toggleGroup" visible="false" fx:id="computerSymbolContainer">
+        <VBox fx:id="computerSymbolContainer" styleClass="toggleGroup" visible="false" spacing="10">
             <fx:define>
-                <ToggleGroup fx:id="computerSymbolGroup"/>
+                <ToggleGroup fx:id="computerSymbolGroup" />
             </fx:define>
-            <Label text="Símbolo Computadora:"/>
-            <RadioButton text="X" toggleGroup="$computerSymbolGroup" fx:id="rbX" userData="X"/>
-            <RadioButton text="O" toggleGroup="$computerSymbolGroup" fx:id="rbO" userData="O"/>
+            <Label text="Símbolo Computadora:" />
+            <RadioButton fx:id="rbCompX" text="X" userData="X" toggleGroup="$computerSymbolGroup" />
+            <RadioButton fx:id="rbCompO" text="O" toggleGroup="$computerSymbolGroup" userData="O" />
         </VBox>
 
         <!-- Botón para iniciar partida -->
-        <Button text="Iniciar Partida" fx:id="btnStart" id="btnStart"/>
+        <Button id="btnStart" fx:id="btnStart" text="Iniciar Partida" maxWidth="150" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
 
     </VBox>
+
 </AnchorPane>
