@@ -78,14 +78,13 @@ public class BoardController implements Initializable {
         int col = GridPane.getColumnIndex(button);
 
         try {
-            button.setText(String.valueOf(gameBoard.getCurrentPlayer()));
-            gameBoard.markBox(row, col);
-            button.setDisable(true);
-
-            if (gameBoard.isFinished()) {
-                handleEndGame();
+            if (gameBoard.isEmptyBox(row, col)) {
+                button.setText(String.valueOf(gameBoard.getCurrentPlayer()));
+                gameBoard.markBox(row, col);
+                if (gameBoard.isFinished()) {
+                    handleEndGame();
+                }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,6 +1,7 @@
 package espol.tresenrayafxg3.controllers;
 
 import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
@@ -36,12 +37,7 @@ public class BoardComputerController extends BoardController {
     protected void handleButtonClick(Button button) {
         super.handleButtonClick(button); // Jugada del humano
 
-        if (gameBoard.isFinished()) {
-            handleEndGame();
-            return;
-        }
-
-        if (gameBoard.getCurrentPlayer() == computerSymbol) {
+        if (gameBoard.getCurrentPlayer() == computerSymbol && !gameBoard.isFinished()) {
             playComputer();
         }
     }
@@ -50,17 +46,29 @@ public class BoardComputerController extends BoardController {
         if (gameBoard.isFinished()) return;
 
         disableBoard(true);
-        PauseTransition waitForAI = new PauseTransition(Duration.seconds(1));
+        PauseTransition waitForAI = new PauseTransition(Duration.seconds(0.3));
         waitForAI.setOnFinished(e -> {
             Position computerMove = computer.getMove();
             int row = computerMove.getRow();
             int column = computerMove.getColumn();
             Button boxButton = buttons[row][column];
             disableBoard(false);
-            boxButton.fire();
+            boxButton.setText(String.valueOf(computerSymbol));
+            try {
+                gameBoard.markBox(row, column);
+            } catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
 
             if (gameBoard.isFinished()) {
-                handleEndGame();
+                // Mostrar el diálogo después de que JavaFX termine el ciclo actual
+                Platform.runLater(() -> {
+                    // Verificar que la escena aún está activa
+                    if (board.getScene() != null) {
+                        handleEndGame();
+                    }
+                });
             }
         });
         waitForAI.play();
@@ -130,14 +138,7 @@ private void handleEndGame() {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
                 Button button = buttons[row][col];
-                if (value) { // Solo deshabilita casillas vacías
-                    boolean isMarked = "X".equals(button.getText()) || "O".equals(button.getText());
-                    if (!isMarked) {
-                        button.setDisable(true);
-                    }
-                } else {
-                    button.setDisable(false);
-                }
+                button.setDisable(value);
             }
         }
     }
