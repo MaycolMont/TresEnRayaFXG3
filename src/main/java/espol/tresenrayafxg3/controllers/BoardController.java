@@ -30,7 +30,7 @@ public class BoardController implements Initializable {
     // It will contain buttons for each cell in the 3x3 grid
 
     @FXML
-    private GridPane board;
+    protected GridPane board;
 
     // Reference to the Board model
     protected Board gameBoard;
@@ -51,7 +51,7 @@ public class BoardController implements Initializable {
         gameBoard = new Board(firstPlayer, secondPlayer);
     }
 
-    private void addButtons() {
+    protected void addButtons() {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
                 Button button = new Button();
