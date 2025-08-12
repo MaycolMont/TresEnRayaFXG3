@@ -25,7 +25,6 @@
                 <ToggleGroup fx:id="modeGroup" />
             </fx:define>
             <Label text="Selecciona modo de juego:" />
-            <RadioButton fx:id="rbIaVsIa" text="IA vs IA" userData="AI_VS_AI" toggleGroup="$modeGroup" />
             <RadioButton fx:id="rbVsIa" text="Jugador vs IA" toggleGroup="$modeGroup" userData="HUMAN_VS_AI" />
             <RadioButton fx:id="rb2Jugadores" text="2 Jugadores" toggleGroup="$modeGroup" userData="HUMAN_VS_HUMAN" />
         </VBox>
