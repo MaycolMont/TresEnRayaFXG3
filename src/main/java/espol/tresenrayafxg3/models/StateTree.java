@@ -43,7 +43,7 @@ public class StateTree {
 
 
     public BoardMove getBestMove() {
-        Board bestState = getBestState(root, true).getData();
+        Board bestState = getBestState(root, true, Integer.MIN_VALUE, Integer.MAX_VALUE).getData();
         if (bestState.isFull() || bestState.isFinished()) return bestState.getLastMove();
         return bestState.getPreviousMove();
     }
@@ -85,29 +85,41 @@ public class StateTree {
     }
 
     // implementación de minMax usando el arbol generado
-    private TreeNode<Board> getBestState(TreeNode<Board> node, boolean isMaximizingPlayer) {
+    private TreeNode<Board> getBestState(TreeNode<Board> node, boolean isMaximizingPlayer, int alpha, int beta) {
         if (node.isLeaf()) {
             return node;
         }
 
-        Board bestState = null;
+        TreeNode<Board> bestNode = null;
         int bestUtility = isMaximizingPlayer ? Integer.MIN_VALUE : Integer.MAX_VALUE;
 
         for (TreeNode<Board> child : node.getChildren()) {
-            TreeNode<Board> childNode = getBestState(child, !isMaximizingPlayer);
+            TreeNode<Board> childNode = getBestState(child, !isMaximizingPlayer, alpha, beta);
             Board childState = childNode.getData();
             int childUtility = childState.getUtility(maxValue, minValue);
 
-            boolean isBetterState = isMaximizingPlayer 
-                ? childUtility > bestUtility
-                : childUtility < bestUtility;
+            if (isMaximizingPlayer) {
+                if (childUtility > bestUtility || bestNode == null) {
+                    bestUtility = childUtility;
+                    bestNode = childNode;
+                    node.setData(bestNode.getData());
+                }
+                alpha = Math.max(alpha, bestUtility);
+            } else {
+                if (childUtility < bestUtility || bestNode == null) {
+                    bestUtility = childUtility;
+                    bestNode = childNode;
+                    node.setData(bestNode.getData());
+                }
+                beta = Math.min(beta, bestUtility);
+            }
 
-            if (isBetterState) {
-                bestState = childState;
-                node.setData(bestState);
-                bestUtility = childUtility;
+            // Poda alfa-beta
+            if (beta <= alpha) {
+                break;
             }
         }
-        return node;
+
+        return bestNode != null ? bestNode : node;
     }
 }

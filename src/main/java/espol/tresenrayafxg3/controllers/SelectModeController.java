@@ -47,7 +47,27 @@ public class SelectModeController implements Initializable {
         });
     }
 
+    // método para verificar que las entradas no sean vacías
+    private boolean validateInputs() {
+        if (modeGroup.getSelectedToggle() == null) {
+            return false;
+        }
+        if (firstPlayerGroup.getSelectedToggle() == null) {
+            return false;
+        }
+        if ("HUMAN_VS_AI".equals(modeGroup.getSelectedToggle().getUserData()) &&
+                computerSymbolGroup.getSelectedToggle() == null) {
+            return false;
+        }
+        return true;
+    }
+
     private void switchToBoard() {
+        if (!validateInputs()) {
+            // Mostrar un mensaje de error o advertencia
+            System.out.println("Por favor, completa todos los campos.");
+            return;
+        }
         String mode = modeGroup.getSelectedToggle().getUserData().toString();
         boolean startX = firstPlayerGroup.getSelectedToggle().getUserData().toString().equals("X");
         String computerSymbol = null;
