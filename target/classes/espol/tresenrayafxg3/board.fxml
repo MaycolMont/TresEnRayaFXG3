@@ -9,8 +9,7 @@
 
 <GridPane   id="board" 
             fx:id="board" 
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="espol.tresenrayafxg3.controllers.BoardController">
+            xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@styles/board.css"/>
     </stylesheets>
