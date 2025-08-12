@@ -1,4 +1,5 @@
 package espol.tresenrayafxg3.models;
+
 import java.util.Iterator;
 
 // Clase Iterable que genera todos los posibles estados de un tablero
@@ -13,10 +14,10 @@ public class BoardStatesGenerator implements Iterable<Board> {
 
     @Override
     public Iterator<Board> iterator() {
-        return new Iterator<Board>(){
+        return new Iterator<Board>() {
             int row = 0;
             int column = 0;
-            
+
             private void nextPosition() {
                 column++;
                 if (column > 2) {
@@ -43,10 +44,12 @@ public class BoardStatesGenerator implements Iterable<Board> {
 
             @Override
             public Board next() {
-                Board newBoard = board.clone(); // clonar para seguir usando el tablero, nunca modificar el tablero original
+                Board newBoard = board.clone(); // clonar para seguir usando el tablero, nunca modificar el tablero
+                                                // original
                 try {
                     newBoard.markBox(row, column);
-                    if (newBoard.isFinished()) finished = true;
+                    if (newBoard.isFinished())
+                        finished = true;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -54,5 +57,5 @@ public class BoardStatesGenerator implements Iterable<Board> {
                 return newBoard;
             }
         };
-    } 
+    }
 }

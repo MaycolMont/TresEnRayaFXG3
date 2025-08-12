@@ -23,7 +23,8 @@ public class StateTree {
     }
 
     public void populate(TreeNode<Board> node, int depth, char value) {
-        if (depth <= 0) return;
+        if (depth <= 0)
+            return;
 
         Board board = node.getData();
 
@@ -41,10 +42,10 @@ public class StateTree {
         }
     }
 
-
     public BoardMove getBestMove() {
         Board bestState = getBestState(root, true, Integer.MIN_VALUE, Integer.MAX_VALUE).getData();
-        if (bestState.isFull() || bestState.isFinished()) return bestState.getLastMove();
+        if (bestState.isFull() || bestState.isFinished())
+            return bestState.getLastMove();
         return bestState.getPreviousMove();
     }
 
@@ -60,19 +61,19 @@ public class StateTree {
             Board bestState = null;
             int maxEval = Integer.MIN_VALUE;
             for (Board boardState : boardGenerator) {
-                Board eval = minMax(boardState, depth-1, false);
+                Board eval = minMax(boardState, depth - 1, false);
                 int childUtility = eval.getUtility(maxValue, minValue);
                 if (childUtility > maxEval || bestState == null) {
                     maxEval = childUtility;
                     bestState = eval;
                 }
             }
-            return bestState; 
+            return bestState;
         } else {
             Board bestState = null;
             int minEval = Integer.MAX_VALUE;
             for (Board boardState : boardGenerator) {
-                Board eval = minMax(boardState, depth-1, true);
+                Board eval = minMax(boardState, depth - 1, true);
 
                 int childUtility = eval.getUtility(maxValue, minValue);
                 if (childUtility < minEval || bestState == null) {

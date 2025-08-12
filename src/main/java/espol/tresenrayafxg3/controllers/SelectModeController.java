@@ -23,11 +23,16 @@ import javafx.scene.layout.VBox;
  * @author elmay
  */
 public class SelectModeController implements Initializable {
-    @FXML private Button btnStart;
-    @FXML private ToggleGroup modeGroup;
-    @FXML private ToggleGroup firstPlayerGroup;
-    @FXML private VBox computerSymbolContainer;
-    @FXML private ToggleGroup computerSymbolGroup;
+    @FXML
+    private Button btnStart;
+    @FXML
+    private ToggleGroup modeGroup;
+    @FXML
+    private ToggleGroup firstPlayerGroup;
+    @FXML
+    private VBox computerSymbolContainer;
+    @FXML
+    private ToggleGroup computerSymbolGroup;
 
     /**
      * Initializes the controller class.

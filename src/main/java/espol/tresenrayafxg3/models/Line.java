@@ -8,18 +8,19 @@ import espol.tresenrayafxg3.util.Suscriber;
 import espol.tresenrayafxg3.util.Publisher;
 
 /**
- *  Almacena casillas que pertenecen a una línea funcional del tablero
- *  es decir, filas, columnas y diagonales. Encapsulando funciones para
- *  verificar su estado de forma individual.
- *  Implementa la interfaz Suscriber para recibir notificaciones de cambios
- *  en las casillas y notificar a sus suscriptores cuando todas las casillas
- *  de la línea son iguales.
+ * Almacena casillas que pertenecen a una línea funcional del tablero
+ * es decir, filas, columnas y diagonales. Encapsulando funciones para
+ * verificar su estado de forma individual.
+ * Implementa la interfaz Suscriber para recibir notificaciones de cambios
+ * en las casillas y notificar a sus suscriptores cuando todas las casillas
+ * de la línea son iguales.
+ * 
  * @author maycmont
  */
 public class Line extends Publisher implements Suscriber {
     private final Box[] casillas = new Box[3];
     private int size = 0;
-    
+
     public Line() {
         // Inicializa las casillas como vacías
         for (int i = 0; i < casillas.length; i++) {
@@ -30,6 +31,7 @@ public class Line extends Publisher implements Suscriber {
     /**
      * Agrega una casilla a la línea y la suscribe a las notificaciones
      * de cambios en su valor.
+     * 
      * @param box la casilla a agregar
      */
     public void add(Box box) {
@@ -37,14 +39,16 @@ public class Line extends Publisher implements Suscriber {
         casillas[size] = box;
         size++;
     }
-    
+
     /**
      * Verifica si todas las casillas de esta línea tienen el mismo valor
      * y no están vacías.
+     * 
      * @return true si todas las casillas son iguales, false en caso contrario
      */
     public boolean isEqual() {
-        if (casillas[0].isEmpty()) return false;
+        if (casillas[0].isEmpty())
+            return false;
         char first = casillas[0].getValue();
         for (Box casilla : casillas) {
             if (!casilla.contains(first)) {
@@ -53,10 +57,11 @@ public class Line extends Publisher implements Suscriber {
         }
         return true;
     }
-    
+
     /**
      * Verifica si value puede ser agregada en esta línea aportando
      * para llenarla con el mismo valor.
+     * 
      * @param value el valor a verificar
      * @return true si value puede ser agregada, false en caso contrario
      */
@@ -68,7 +73,7 @@ public class Line extends Publisher implements Suscriber {
         }
         return true;
     }
-    
+
     public boolean isEmpty() {
         for (Box casilla : casillas) {
             if (!casilla.isEmpty()) {
@@ -77,11 +82,10 @@ public class Line extends Publisher implements Suscriber {
         }
         return true;
     }
-    
-    public Box getAt(int index){
+
+    public Box getAt(int index) {
         return casillas[index];
     }
-    
 
     @Override
     public String toString() {

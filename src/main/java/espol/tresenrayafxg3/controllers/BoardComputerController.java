@@ -42,7 +42,8 @@ public class BoardComputerController extends BoardController {
     }
 
     private void playComputer() {
-        if (gameBoard.isFinished()) return;
+        if (gameBoard.isFinished())
+            return;
 
         disableBoard(true);
         PauseTransition waitForAI = new PauseTransition(Duration.seconds(0.3));
@@ -73,36 +74,38 @@ public class BoardComputerController extends BoardController {
         waitForAI.play();
     }
 
-private void handleEndGame() {
-    // Verifica si el tablero sigue visible (para evitar doble ejecución al cambiar de escena)
-    if (board.getScene() == null) return;
+    private void handleEndGame() {
+        // Verifica si el tablero sigue visible (para evitar doble ejecución al cambiar
+        // de escena)
+        if (board.getScene() == null)
+            return;
 
-    char winner = gameBoard.getWinner();
-    String message;
-    if (winner == 'X' || winner == 'O') {
-        message = "¡Ha ganado el jugador '" + winner + "'!";
-    } else {
-        message = "¡Empate!";
-    }
-
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-    alert.setTitle("Juego Terminado");
-    alert.setHeaderText(message);
-    alert.setContentText("¿Deseas volver a jugar o regresar al menú principal?");
-
-    ButtonType btnReplay = new ButtonType("Volver a jugar");
-    ButtonType btnMenu = new ButtonType("Menú Principal");
-
-    alert.getButtonTypes().setAll(btnReplay, btnMenu);
-
-    alert.showAndWait().ifPresent(response -> {
-        if (response == btnReplay) {
-            resetBoard();
-        } else if (response == btnMenu) {
-            goToMainMenu();
+        char winner = gameBoard.getWinner();
+        String message;
+        if (winner == 'X' || winner == 'O') {
+            message = "¡Ha ganado el jugador '" + winner + "'!";
+        } else {
+            message = "¡Empate!";
         }
-    });
-}
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Juego Terminado");
+        alert.setHeaderText(message);
+        alert.setContentText("¿Deseas volver a jugar o regresar al menú principal?");
+
+        ButtonType btnReplay = new ButtonType("Volver a jugar");
+        ButtonType btnMenu = new ButtonType("Menú Principal");
+
+        alert.getButtonTypes().setAll(btnReplay, btnMenu);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == btnReplay) {
+                resetBoard();
+            } else if (response == btnMenu) {
+                goToMainMenu();
+            }
+        });
+    }
 
     private void resetBoard() {
         board.getChildren().clear();

@@ -14,7 +14,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -90,33 +89,33 @@ public class BoardController implements Initializable {
         }
     }
 
-private void handleEndGame() {
-    char winner = gameBoard.getWinner();
-    String message;
-    if (winner == 'X' || winner == 'O') {
-        message = "¡Ha ganado el jugador '" + winner + "'!";
-    } else {
-        message = "¡Empate!";
-    }
-
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-    alert.setTitle("Juego Terminado");
-    alert.setHeaderText(message);
-    alert.setContentText("¿Deseas volver a jugar o regresar al menú principal?");
-
-    ButtonType btnReplay = new ButtonType("Volver a jugar");
-    ButtonType btnMenu = new ButtonType("Menú Principal");
-
-    alert.getButtonTypes().setAll(btnReplay, btnMenu);
-
-    alert.showAndWait().ifPresent(response -> {
-        if (response == btnReplay) {
-            resetBoard();
-        } else if (response == btnMenu) {
-            goToMainMenu();
+    private void handleEndGame() {
+        char winner = gameBoard.getWinner();
+        String message;
+        if (winner == 'X' || winner == 'O') {
+            message = "¡Ha ganado el jugador '" + winner + "'!";
+        } else {
+            message = "¡Empate!";
         }
-    });
-}
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Juego Terminado");
+        alert.setHeaderText(message);
+        alert.setContentText("¿Deseas volver a jugar o regresar al menú principal?");
+
+        ButtonType btnReplay = new ButtonType("Volver a jugar");
+        ButtonType btnMenu = new ButtonType("Menú Principal");
+
+        alert.getButtonTypes().setAll(btnReplay, btnMenu);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == btnReplay) {
+                resetBoard();
+            } else if (response == btnMenu) {
+                goToMainMenu();
+            }
+        });
+    }
 
     private void goToMainMenu() {
         try {
